@@ -158,8 +158,8 @@ function MainApp() {
                 </h1>
 
                 <p className="max-w-2xl mx-auto text-sm sm:text-base text-slate-600 font-medium">
-                  Direct payment per order via GCash, Maya, or Cards. No top-up wallet needed. 
-                  Get your promo or regular load delivered directly to your mobile number in seconds.
+                  Direct payment per order via GCash and Maya (Manual Verification). 
+                  Pay directly to James Hope Bontuyan (Maya: 09355883709) and enter your reference number for quick admin review and load dispatch.
                 </p>
 
                 {/* Quick Number Input Card */}
@@ -431,12 +431,11 @@ function MainApp() {
           </div>
 
           <div>
-            <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-3">Direct Payments</h4>
+            <h4 className="font-bold text-white text-xs uppercase tracking-wider mb-3">Manual Payments</h4>
             <div className="space-y-1.5 text-slate-400 text-xs">
-              <p>• GCash (Direct e-Wallet)</p>
-              <p>• Maya (Direct & QR)</p>
-              <p>• Visa / Mastercard</p>
-              <p>• Manual Transfer Fallback</p>
+              <p>• GCash (Manual Transfer / QR)</p>
+              <p>• Maya (09355883709 - James Hope Bontuyan)</p>
+              <p>• Admin Review & Quick E-Load Dispatch</p>
             </div>
           </div>
 

@@ -955,26 +955,56 @@ export const AdminDashboard: React.FC = () => {
               </div>
             </div>
 
-            <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-3">
-              <span className="font-extrabold text-amber-950 block">Manual GCash / Maya Receiver Accounts</span>
-              <div className="grid grid-cols-2 gap-3">
-                <div>
-                  <label className="block font-semibold text-slate-700 mb-1">GCash Account Name</label>
-                  <input
-                    type="text"
-                    value={settings.manualPaymentGcashName}
-                    onChange={(e) => setSettings({ ...settings, manualPaymentGcashName: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white"
-                  />
+            <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 space-y-4">
+              <span className="font-extrabold text-amber-950 block">Manual Payment Receiver Accounts</span>
+              
+              {/* GCash Details */}
+              <div className="space-y-1.5">
+                <span className="text-[11px] font-black text-blue-800 uppercase tracking-wider block">GCash Account Details</span>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block font-semibold text-slate-700 mb-1">GCash Account Name</label>
+                    <input
+                      type="text"
+                      value={settings.manualPaymentGcashName || 'JAMES HOPE BONTUYAN'}
+                      onChange={(e) => setSettings({ ...settings, manualPaymentGcashName: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-semibold text-slate-700 mb-1">GCash Number</label>
+                    <input
+                      type="text"
+                      value={settings.manualPaymentGcashNumber || '09355883709'}
+                      onChange={(e) => setSettings({ ...settings, manualPaymentGcashNumber: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white"
+                    />
+                  </div>
                 </div>
-                <div>
-                  <label className="block font-semibold text-slate-700 mb-1">GCash Number</label>
-                  <input
-                    type="text"
-                    value={settings.manualPaymentGcashNumber}
-                    onChange={(e) => setSettings({ ...settings, manualPaymentGcashNumber: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white"
-                  />
+              </div>
+
+              {/* Maya Details */}
+              <div className="space-y-1.5 pt-2 border-t border-amber-200/80">
+                <span className="text-[11px] font-black text-emerald-800 uppercase tracking-wider block">Maya Account Details</span>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block font-semibold text-slate-700 mb-1">Maya Account Name</label>
+                    <input
+                      type="text"
+                      value={settings.manualPaymentMayaName || 'JAMES HOPE BONTUYAN'}
+                      onChange={(e) => setSettings({ ...settings, manualPaymentMayaName: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white"
+                    />
+                  </div>
+                  <div>
+                    <label className="block font-semibold text-slate-700 mb-1">Maya Number</label>
+                    <input
+                      type="text"
+                      value={settings.manualPaymentMayaNumber || '09355883709'}
+                      onChange={(e) => setSettings({ ...settings, manualPaymentMayaNumber: e.target.value })}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 text-xs bg-white"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

@@ -4,16 +4,16 @@ import { SystemSettings } from '../types';
 
 export const DEFAULT_SETTINGS: SystemSettings = {
   businessName: 'James Load Services',
-  supportPhone: '+63 917 888 9999',
+  supportPhone: '09355883709',
   supportEmail: 'support@jamesloadservices.ph',
-  operatingHours: '6:00 AM - 11:00 PM Daily (Automated 24/7 Delivery)',
-  manualPaymentGcashName: 'JAMES BONTUYAN',
-  manualPaymentGcashNumber: '0917-888-9999',
-  manualPaymentMayaName: 'JAMES BONTUYAN',
-  manualPaymentMayaNumber: '0917-888-9999',
-  announcement: '⚡ Instant automated load delivery is live for Globe, TM, Smart, TNT, and DITO! Direct payments via GCash, Maya & Cards.',
+  operatingHours: '6:00 AM - 11:00 PM Daily',
+  manualPaymentGcashName: 'JAMES HOPE BONTUYAN',
+  manualPaymentGcashNumber: '09355883709',
+  manualPaymentMayaName: 'JAMES HOPE BONTUYAN',
+  manualPaymentMayaNumber: '09355883709',
+  announcement: '📢 Pay via GCash or Maya (Manual Verification). Transfer exact amount and enter reference number for fast admin review & loading.',
   sandboxMode: false,
-  autoFulfillmentEnabled: true,
+  autoFulfillmentEnabled: false,
   updatedAt: new Date().toISOString()
 };
 
