@@ -1,0 +1,6 @@
+{
+  "name": "James Load Services",
+  "description": "Prepaid Load Reseller platform in the Philippines with direct payments per order, real-time order tracking, and administrator profit & inventory management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

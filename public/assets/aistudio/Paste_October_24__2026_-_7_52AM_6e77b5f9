@@ -1,0 +1,894 @@
+JAMES LOAD SERVICES — COMPLETE MASTER IMPLEMENTATION PROMPT
+
+Prepaid Load Reseller Web App with Direct Payments, Firebase, Order Management, and Profit Tracking
+
+1. ROLE AND PRIMARY OBJECTIVE
+
+Act as a senior full-stack developer, Firebase architect, payment integration engineer, database designer, cybersecurity specialist, and UI/UX designer.
+
+Build and maintain a complete, functional, mobile-friendly prepaid load reseller web application named James Load Services, serving customers in the Philippines.
+
+The application must enable customers to purchase prepaid load and supported network promos, pay separately for each order through an eligible payment gateway, and track payment and fulfillment status.
+
+The owner must be able to manage products, configure selling prices and provider costs, process orders, review transactions, reconcile payments, calculate profit, and manage customer support.
+
+Build the actual application, not a static mockup.
+
+IMPORTANT: If this project already exists in Google AI Studio, inspect and extend it. Preserve working functionality, existing design elements, and project configuration wherever practical. Do not rebuild from scratch, delete working files, or replace existing components unnecessarily.
+
+If the project is new, establish the architecture and create the required files.
+
+Do not claim that an external service is connected, a payment is verified, or load has been delivered unless that result has actually been confirmed.
+
+⸻
+
+2. REQUIRED TECHNOLOGY STACK
+
+Use the following technology stack where compatible with the existing project:
+
+Frontend:
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* Lucide React
+* React Router
+
+Backend:
+
+* Firebase Authentication
+* Cloud Firestore
+* Firebase Cloud Functions
+* Firebase Storage where necessary
+* Firebase App Check where supported
+* Firebase Hosting
+* Firebase Emulator Suite for development and testing
+
+Use the modular Firebase SDK, strong TypeScript types, reusable components, and maintainable service modules.
+
+If the existing project uses a different compatible framework, inspect it first and preserve it unless a migration is necessary.
+
+Never expose service-account credentials, payment gateway secret keys, load provider tokens, webhook signing secrets, or other privileged credentials in client-side code.
+
+⸻
+
+3. BRANDING AND DESIGN
+
+Brand name: James Load Services
+
+Create a modern, premium, clean, mobile-first design.
+
+Visual direction:
+
+* Yellow and white primary theme.
+* Dark text and subtle gray backgrounds.
+* Rounded cards and polished form controls.
+* Consistent typography and spacing.
+* Professional transaction status indicators.
+* Responsive mobile, tablet, and desktop layouts.
+* Bottom navigation on mobile.
+* Sidebar navigation on desktop.
+* Accessible colors, visible focus states, and keyboard navigation.
+
+Create a simple text-based logo if no logo asset exists.
+
+The design should feel trustworthy and easy to use for Filipino customers buying prepaid load.
+
+Avoid clutter, excessive animations, fake testimonials, invented customer counts, and decorative elements that interfere with usability.
+
+All visible buttons, forms, links, dropdowns, and menus must have working actions.
+
+⸻
+
+4. CUSTOMER APPLICATION
+
+Implement the following customer-facing pages and features.
+
+A. Homepage
+
+Include:
+
+* James Load Services branding.
+* Buy Load button.
+* Supported network categories.
+* Featured and available load products.
+* How ordering works.
+* Order tracking information.
+* Login and registration links.
+* Administrator-configured customer support details.
+
+Do not falsely claim official partnerships with mobile networks or payment providers.
+
+B. Authentication
+
+Implement:
+
+* Firebase email/password registration.
+* Login and logout.
+* Password reset.
+* Email verification.
+* Persistent authentication sessions.
+* Protected customer routes.
+* Appropriate validation and error messages.
+
+Create customer profile records using trusted backend logic or a securely validated process.
+
+Never store passwords in Firestore.
+
+C. Product catalog
+
+Support configurable products for:
+
+* Globe
+* TM
+* Smart
+* TNT
+* DITO
+* Other networks added by the administrator.
+
+Support product categories such as:
+
+* Regular prepaid load.
+* Data packages.
+* Call and text promos.
+* Network-specific promos.
+* Other authorized digital products.
+
+Each product must include:
+
+* Product ID.
+* Product name.
+* Network.
+* Category.
+* Description.
+* Face value or package details.
+* Customer selling price.
+* Availability.
+* Optional image.
+* Provider product mapping.
+* Fulfillment mode.
+
+The administrator must manage the actual catalog.
+
+Do not invent provider product IDs or imply that an unsupported product can be delivered automatically.
+
+Only products configured for an eligible fulfillment method can be sold.
+
+D. Checkout
+
+Build a functional checkout experience where customers can:
+
+1. Select a network.
+2. Select an available product.
+3. Enter a Philippine mobile number.
+4. Confirm the recipient number.
+5. Review the product and total price.
+6. Select an available payment method.
+7. Confirm the order.
+8. Proceed to the payment gateway.
+9. Return to a transaction status page.
+
+Validate mobile numbers and normalize them consistently.
+
+Retrieve the authoritative selling price from the backend. Never trust a browser-submitted amount.
+
+Display the final amount before payment.
+
+Prevent duplicate submissions in the UI and duplicate order creation on the backend.
+
+E. Customer dashboard
+
+Include:
+
+* Recent orders.
+* Transaction history.
+* Search and filters.
+* Completed order count.
+* Verified spending totals.
+* Account settings.
+* Support requests.
+
+Display financial information derived from trusted records, not hardcoded statistics.
+
+F. Order tracking
+
+Display:
+
+* Unique order reference.
+* Product and network.
+* Masked recipient number where appropriate.
+* Selling price and verified payment amount.
+* Payment status.
+* Fulfillment status.
+* Order timestamp.
+* Payment confirmation timestamp.
+* Provider reference where appropriate.
+* Safe failure explanations.
+* Customer support action.
+
+Use real database records and clear loading, pending, success, and failure states.
+
+G. Customer support
+
+Implement an order-specific support request system.
+
+Customers can submit an issue, select an order, provide details, and track the request status.
+
+Restrict each customer to their own support records.
+
+⸻
+
+5. ADMIN DASHBOARD
+
+Create a secure administration interface separate from ordinary customer pages.
+
+Dashboard overview
+
+Display actual database-derived metrics:
+
+* Total orders.
+* Successful orders.
+* Pending payments.
+* Orders awaiting fulfillment.
+* Failed orders.
+* Verified gross sales.
+* Provider costs.
+* Payment gateway fees.
+* Refund totals.
+* Expected margin.
+* Realized profit.
+* Orders requiring reconciliation.
+
+Use appropriate date filters and network breakdowns.
+
+Product management
+
+Administrators can:
+
+* Create and edit products.
+* Enable and disable products.
+* Configure networks and categories.
+* Configure provider product mappings.
+* Set selling prices.
+* Set provider costs.
+* Configure optional markups.
+* View expected margins.
+* Search and filter products.
+
+Provider costs and internal financial data must not be exposed to ordinary customers unless explicitly intended.
+
+Use integer centavos or another documented precision-safe representation for financial calculations.
+
+Order management
+
+Administrators can:
+
+* View orders with pagination.
+* Search by order reference.
+* Filter by date, network, payment status, and fulfillment status.
+* Inspect payment and provider references.
+* Review failed or uncertain transactions.
+* Initiate safe fulfillment retries when eligible.
+* Review refunds.
+* Manage manual fulfillment.
+* Export appropriate transaction reports.
+
+Every privileged action must be authorized on the backend and recorded in an audit log.
+
+Settings
+
+Provide configurable settings for:
+
+* Business name and branding.
+* Customer support contacts.
+* Product availability.
+* Payment methods.
+* Payment gateway status.
+* Load provider status.
+* Manual or automatic fulfillment mode.
+* Service fees.
+* Customer announcements.
+
+Do not allow customers to modify administrative settings.
+
+User management
+
+Allow authorized administrators to search customers, inspect appropriate account information, and disable accounts through trusted backend operations.
+
+Never expose passwords, private tokens, or unnecessary sensitive information.
+
+⸻
+
+6. DIRECT PAYMENT PER ORDER — REQUIRED PAYMENT MODEL
+
+Use direct payment per order.
+
+Every purchase has its own payment request. Do not implement a prepaid customer wallet or customer top-up balance as part of this project.
+
+Potential payment methods include GCash, Maya, cards, bank payments, or other methods supported by the selected eligible payment gateway.
+
+Do not assume that direct API access to GCash or Maya is available or that every gateway supports every method.
+
+Select a real gateway only after its official documentation, merchant eligibility, supported payment methods, and account requirements have been confirmed.
+
+If no gateway has been configured, implement the integration interface and clearly documented setup instructions. Do not fabricate successful payments.
+
+Required checkout flow
+
+1. Customer selects a product.
+2. Backend validates the authenticated user, product, recipient number, and price.
+3. Backend creates an order with a unique reference.
+4. Backend creates a payment request using server-side gateway credentials.
+5. Customer completes payment using the supported gateway flow.
+6. Gateway sends a trusted server-to-server notification or webhook.
+7. Backend verifies the event using the gateway’s documented verification mechanism.
+8. Backend validates the order reference, payment reference, amount, currency, and status.
+9. Backend records the verified payment.
+10. Order becomes eligible for fulfillment.
+11. Authorized load provider processes the order.
+12. Backend records the provider response and updates the fulfillment status.
+13. Customer can track the order and view its receipt.
+
+A redirect to a success page, screenshot, client-side flag, or user-submitted reference must never establish payment success.
+
+Payment gateway adapter
+
+Create a provider-agnostic interface supporting:
+
+* Payment request creation.
+* Payment status lookup.
+* Webhook signature verification.
+* Payment event normalization.
+* Refund requests where supported.
+* Reconciliation of uncertain payment status.
+
+Use the actual official API specification for the chosen gateway.
+
+Do not invent endpoints, signatures, response formats, or credentials.
+
+Use a hosted checkout or approved payment interface where appropriate.
+
+Never collect customer GCash/Maya passwords, PINs, or OTPs.
+
+Store all privileged gateway credentials in Firebase Functions secrets or another supported server-side secret store.
+
+Never expose them through React, public Firestore documents, or Vite client-side environment variables.
+
+Manual payment fallback
+
+If no online gateway is configured, an optional manual-payment mode may be implemented.
+
+It must:
+
+* Display administrator-configured payment instructions.
+* Accept an optional payment reference or receipt upload.
+* Mark the payment as awaiting review.
+* Require authorized verification.
+* Never treat an uploaded receipt as automatic proof of payment.
+
+Clearly label this mode as manual verification.
+
+⸻
+
+7. PAYMENT AND FULFILLMENT STATE MACHINES
+
+Store payment and fulfillment status separately.
+
+Supported payment statuses:
+
+* pending
+* processing
+* paid
+* failed
+* cancelled
+* expired
+* refund_pending
+* refunded
+* review_required
+
+Supported fulfillment statuses:
+
+* not_started
+* queued
+* processing
+* successful
+* failed
+* unknown
+* manual_review
+* cancelled
+
+Enforce permitted transitions in trusted backend code.
+
+Rules:
+
+* New orders begin with payment pending and fulfillment not started.
+* Only verified payment can make an eligible order fulfillable.
+* Failed, cancelled, or expired payments cannot trigger load delivery.
+* A browser redirect cannot change payment status.
+* A payment webhook must be verified before it can update financial records.
+* A provider timeout must not automatically be treated as successful delivery.
+* An uncertain provider transaction must be reconciled before potentially duplicating a billable request.
+* Refund processing must be recorded separately from fulfillment.
+* An order can be paid while its load delivery is still pending or failed.
+
+Reject invalid state transitions and record suspicious attempts.
+
+Use server-side transactions, idempotency keys, and durable operation records where appropriate.
+
+⸻
+
+8. ACTUAL LOAD DELIVERY AND PROVIDER INTEGRATION
+
+Create a load provider adapter for a legitimate prepaid load distributor or authorized reseller API.
+
+The adapter should support, where available:
+
+* Product catalog mapping.
+* Availability checks.
+* Order submission.
+* Provider transaction references.
+* Status lookup.
+* Idempotency or duplicate-request prevention.
+* Failure handling.
+* Reconciliation.
+
+Use the provider’s actual documentation and supported API.
+
+Never invent provider endpoints or claim a live integration exists without credentials and testing.
+
+If no provider has been configured:
+
+* Implement a development-only sandbox adapter.
+* Clearly identify sandbox transactions.
+* Keep automatic live fulfillment disabled.
+* Provide optional manual fulfillment for paid orders.
+* Do not claim that load was delivered.
+* Document the exact steps required to connect a real provider.
+
+Fulfillment rules
+
+Before fulfillment:
+
+* Verify the payment.
+* Confirm the order amount and currency.
+* Confirm the product remains eligible for fulfillment.
+* Confirm no equivalent fulfillment operation has already completed or is in progress.
+* Record the fulfillment attempt.
+
+After fulfillment:
+
+* Store the provider reference.
+* Record the result and timestamp.
+* Update the order status.
+* Notify the customer through the app.
+
+For timeouts or ambiguous provider responses, query the provider’s status before retrying when supported.
+
+Never issue duplicate load simply because a request timed out.
+
+If payment succeeds but fulfillment fails, preserve the paid payment record and initiate safe reconciliation, manual review, or a supported refund workflow.
+
+⸻
+
+9. PROFIT AND FINANCIAL ACCOUNTING
+
+Track expected and realized profit separately.
+
+Record appropriate amounts for:
+
+* Customer selling price.
+* Verified payment amount.
+* Provider cost.
+* Gateway fees.
+* Refunds.
+* Other attributable costs.
+* Expected margin.
+* Realized profit.
+
+Calculate expected margin as:
+
+Selling price - provider cost - applicable payment fees - other attributable costs.
+
+Calculate realized profit only after the relevant payment, fulfillment, and cost records have been reconciled.
+
+Exclude pending, failed, cancelled, and fully refunded orders from ordinary retained-sales reporting as appropriate.
+
+Do not allow customers to modify financial records or balances.
+
+Use immutable financial events or a trusted ledger for auditable accounting.
+
+Do not delete original transactions to represent refunds. Record refund and reversal events separately.
+
+Use integer centavos or a clearly defined precision-safe money representation.
+
+All financial totals must be computed from trusted backend records.
+
+⸻
+
+10. FIRESTORE DATABASE SCHEMA
+
+Reuse existing collections where practical. Document any schema changes or migration requirements.
+
+users/{uid}
+
+Fields:
+
+* uid
+* displayName
+* email
+* username
+* photoURL
+* accountStatus
+* createdAt
+* updatedAt
+
+Never store passwords.
+
+products/{productId}
+
+Fields:
+
+* name
+* network
+* category
+* description
+* faceValue
+* sellingPrice
+* isActive
+* providerId
+* providerProductId
+* fulfillmentMode
+* createdAt
+* updatedAt
+
+Keep confidential provider costs and internal configuration in appropriately restricted records.
+
+orders/{orderId}
+
+Fields:
+
+* orderReference
+* userId
+* productId
+* productNameSnapshot
+* networkSnapshot
+* recipientNumber
+* sellingPrice
+* currency
+* paymentGateway
+* paymentReference
+* paymentStatus
+* fulfillmentStatus
+* providerReference
+* idempotencyKey
+* failureCode
+* createdAt
+* updatedAt
+* paidAt
+* fulfilledAt
+
+Store historical pricing snapshots so product price changes do not alter previous orders.
+
+payments/{paymentId}
+
+Fields:
+
+* orderId
+* userId
+* gateway
+* gatewayReference
+* amount
+* currency
+* status
+* verifiedAt
+* createdAt
+* updatedAt
+
+providerTransactions/{transactionId}
+
+Fields:
+
+* orderId
+* providerId
+* providerReference
+* requestStatus
+* fulfillmentStatus
+* errorCode
+* createdAt
+* updatedAt
+
+financialLedger/{entryId}
+
+Fields:
+
+* orderId
+* entryType
+* amount
+* currency
+* sourceReference
+* reversalOf
+* description
+* createdAt
+
+Ledger entries must not be writable by customers.
+
+paymentEvents/{eventId}
+
+Record verified or appropriately classified payment events, provider event identifiers, processing results, and timestamps. Protect this collection from public access.
+
+adminAuditLogs/{logId}
+
+Fields:
+
+* adminUid
+* action
+* targetType
+* targetId
+* reason
+* createdAt
+
+Only authorized administrators and trusted backend code may access this collection.
+
+supportRequests/{requestId}
+
+Store customer-owned support requests and their statuses with appropriate access controls.
+
+Add other collections if necessary, including reconciliation records and idempotency records.
+
+Use server timestamps for trusted events and document any denormalized fields.
+
+⸻
+
+11. FIREBASE SECURITY AND AUTHORIZATION
+
+Create or update:
+
+* firestore.rules
+* storage.rules
+* firestore.indexes.json
+* Firebase configuration files.
+* Cloud Functions source files where required.
+
+Security requirements:
+
+* Deny access by default.
+* Customers can read only their own private orders and payment information.
+* Customers cannot modify payment status.
+* Customers cannot modify fulfillment status.
+* Customers cannot change selling prices or provider costs.
+* Customers cannot forge payment events.
+* Customers cannot access other customers’ recipient numbers.
+* Customers cannot read confidential provider transactions.
+* Administrative access must be verified through Firebase custom claims or another trusted mechanism.
+* Users cannot assign themselves administrator privileges.
+* Payment webhooks must use documented verification mechanisms.
+* Cloud Functions must validate authorization and input independently.
+* Financial records and audit logs must not be writable by ordinary users.
+* File uploads must enforce type, size, and ownership restrictions.
+* Do not use unrestricted test-mode rules in production.
+
+Use Firebase App Check where practical, but do not treat it as a substitute for authorization.
+
+Create a secure first-administrator bootstrap procedure that requires a trusted operator. Never create a public endpoint that makes the caller an administrator.
+
+⸻
+
+12. BACKEND CLOUD FUNCTIONS
+
+Implement suitable trusted backend functions for:
+
+* Customer profile initialization.
+* Order creation.
+* Authoritative price calculation.
+* Payment request creation.
+* Payment webhook verification.
+* Payment status reconciliation.
+* Provider fulfillment.
+* Provider status reconciliation.
+* Safe fulfillment retries.
+* Financial event creation.
+* Refund requests where supported.
+* Administrator product management where needed.
+* Support operations.
+
+Each function must:
+
+* Validate authentication and authorization.
+* Validate request data.
+* Use transactions or batched writes where appropriate.
+* Handle retries and duplicate events safely.
+* Avoid race conditions.
+* Verify payment amount and currency.
+* Protect server-side secrets.
+* Record auditable results.
+* Return structured errors.
+
+Server SDK operations bypass Firestore Security Rules. Therefore, every privileged Cloud Function must perform its own validation and authorization.
+
+Do not expose privileged operations through unprotected endpoints.
+
+⸻
+
+13. ERROR HANDLING AND CUSTOMER EXPERIENCE
+
+Implement:
+
+* Loading states.
+* Empty states.
+* Retry controls where safe.
+* Toast notifications.
+* Inline validation.
+* Clear pending-payment instructions.
+* Clear failed-payment instructions.
+* Provider outage handling.
+* Payment timeout handling.
+* Order reconciliation states.
+* Useful transaction detail screens.
+
+Handle network errors, authentication errors, permission failures, invalid numbers, unavailable products, failed payments, provider timeouts, duplicate requests, and refund delays.
+
+Do not show a generic success page for every outcome.
+
+Do not mark an order successful simply because an operation was attempted.
+
+⸻
+
+14. TESTING AND SECURITY VALIDATION
+
+Create and run tests for:
+
+* Authentication.
+* Product pricing validation.
+* Order creation.
+* Duplicate submissions.
+* Payment verification.
+* Invalid webhook signatures.
+* Duplicate webhook events.
+* Incorrect amount or currency.
+* Delayed payment events.
+* Failed payments.
+* Payment success followed by fulfillment failure.
+* Provider timeouts.
+* Duplicate fulfillment prevention.
+* Refund processing.
+* Profit calculation.
+* Customer data isolation.
+* Admin authorization.
+* Firestore and Storage Security Rules.
+
+Verify that:
+
+1. Unverified payments never trigger fulfillment.
+2. Client redirects never establish payment success.
+3. Customers cannot alter prices or transaction statuses.
+4. Duplicate webhooks do not create duplicate financial events or load orders.
+5. Uncertain fulfillment is reconciled safely.
+6. Successful payment records remain intact if delivery fails.
+7. No privileged credential appears in frontend bundles.
+8. Existing working features continue to function.
+
+Use the Firebase Emulator Suite where practical.
+
+Run available build, lint, type-check, and test commands. Fix errors where possible. Report only tests that were actually executed.
+
+⸻
+
+15. ENVIRONMENT CONFIGURATION AND DEPLOYMENT
+
+Create or update:
+
+* package.json
+* .env.example
+* .gitignore
+* Firebase configuration.
+* Security Rules.
+* Firestore indexes.
+* Cloud Functions.
+* README documentation.
+
+Document:
+
+1. Creating a Firebase project.
+2. Enabling Authentication.
+3. Creating Firestore.
+4. Configuring Storage.
+5. Setting environment variables.
+6. Deploying Security Rules and indexes.
+7. Deploying Cloud Functions.
+8. Configuring the payment gateway.
+9. Registering webhook URLs.
+10. Storing gateway secrets.
+11. Connecting the authorized load provider.
+12. Configuring the first administrator.
+13. Running locally.
+14. Running tests.
+15. Deploying to production.
+16. Reconciling pending payments and uncertain fulfillment.
+
+Never include real secrets in .env.example.
+
+Do not expose privileged credentials through VITE_ variables or client bundles.
+
+Clearly distinguish Firebase public client configuration from private server-side credentials.
+
+Do not claim deployment succeeded unless it actually occurred.
+
+⸻
+
+16. IMPLEMENTATION ORDER
+
+Follow this implementation sequence:
+
+Phase 1: Inspect the existing project and preserve working functionality.
+
+Phase 2: Complete the responsive customer interface, authentication, product catalog, and checkout.
+
+Phase 3: Implement authoritative backend order creation and pricing validation.
+
+Phase 4: Implement the payment gateway abstraction and sandbox integration.
+
+Phase 5: Implement trusted webhook verification, idempotency, and payment reconciliation.
+
+Phase 6: Implement separate payment and fulfillment states.
+
+Phase 7: Implement the load provider adapter, manual fallback, and safe fulfillment retries.
+
+Phase 8: Implement financial reporting, expected and realized profit, refunds, and audit logs.
+
+Phase 9: Complete Security Rules, Cloud Functions authorization, indexes, and security tests.
+
+Phase 10: Run builds and tests, resolve errors, and document deployment.
+
+Do not stop after the landing page or checkout UI. Implement the complete workflow as far as the available environment allows.
+
+If gateway or load provider credentials are missing, finish the safe integration scaffolding and explain exactly what configuration remains.
+
+⸻
+
+17. FINAL ACCEPTANCE CRITERIA
+
+The MVP must allow:
+
+* Customers to register and log in.
+* Customers to browse real configured products.
+* Customers to create valid orders.
+* Backend-authoritative pricing.
+* Secure payment request creation.
+* Trusted payment verification.
+* Separate payment and fulfillment status.
+* Real order tracking and transaction history.
+* Admin product and pricing management.
+* Admin order processing and reconciliation.
+* Expected margin and realized profit reporting.
+* Secure data isolation and administrator authorization.
+* Responsive mobile and desktop use.
+* Accurate error and pending states.
+
+Live payment and live load delivery must remain disabled until the corresponding real integrations have been configured and tested.
+
+No fake successful payments, fake delivered load, fake profit, placeholder buttons, or fabricated integration results.
+
+⸻
+
+18. FINAL EXECUTION INSTRUCTIONS
+
+Start by inspecting the existing James Load Services project in Google AI Studio.
+
+Modify the current files directly, preserve working features, and implement the full reseller workflow. Install compatible dependencies where supported, run available checks, and fix errors.
+
+Do not return only a plan, tutorial, or isolated code snippets.
+
+At completion, report:
+
+* Features implemented.
+* Files added and modified.
+* Firebase configuration status.
+* Payment gateway integration status.
+* Load provider integration status.
+* Security Rules and backend protections.
+* Actual build and test results.
+* Remaining credentials and manual setup.
+* Exact next steps for sandbox testing and production deployment.
+
+The priority is a secure, fully functional prepaid load reseller platform with direct payment per order, accurate profit tracking, and real provider fulfillment—not a visual demo. Begin implementation now.

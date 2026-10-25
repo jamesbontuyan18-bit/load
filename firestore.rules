@@ -1,0 +1,103 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default Deny Catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == 'jamesbontuyan84@gmail.com' ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+      );
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // User profiles
+    match /users/{userId} {
+      allow get: if isOwner(userId) || isAdmin();
+      allow list: if isAdmin();
+      allow create: if isOwner(userId) && 
+        incoming().uid == request.auth.uid &&
+        (incoming().role == 'customer' || isAdmin());
+      allow update: if (isOwner(userId) && incoming().role == existing().role) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Administrators registry
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Products catalog (public read, admin write)
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Orders: Allow guest creation, public receipt & reference lookup, updates
+    match /orders/{orderId} {
+      allow get, list: if true;
+      allow create: if incoming().sellingPrice > 0;
+      allow update: if true;
+      allow delete: if isAdmin();
+    }
+
+    // Payments: Allow recording verified gateway transactions
+    match /payments/{paymentId} {
+      allow get, list: if true;
+      allow write: if true;
+    }
+
+    // Financial Ledger (Restricted read to admin, write allowed for transaction recording)
+    match /financialLedger/{entryId} {
+      allow read: if isAdmin();
+      allow write: if true;
+    }
+
+    // Support Requests
+    match /supportRequests/{requestId} {
+      allow get, list: if true;
+      allow create: if true;
+      allow update: if true;
+      allow delete: if isAdmin();
+    }
+
+    // Admin Audit Logs
+    match /adminAuditLogs/{logId} {
+      allow read, write: if isAdmin();
+    }
+
+    // System Settings (Public read for business contacts & payment instructions, admin write)
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Price Drop Alerts
+    match /priceDropAlerts/{alertId} {
+      allow get, list: if true;
+      allow create: if incoming().email is string && incoming().email.size() > 3;
+      allow update, delete: if true;
+    }
+  }
+}

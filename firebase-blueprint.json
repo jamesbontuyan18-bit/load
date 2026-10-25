@@ -1,0 +1,231 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "phoneNumber": { "type": "string", "maxLength": 32 },
+        "role": { "type": "string", "enum": ["customer", "admin"] },
+        "accountStatus": { "type": "string", "enum": ["active", "suspended"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email", "role", "accountStatus"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Prepaid load denomination or promo package",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "maxLength": 128 },
+        "network": { "type": "string", "enum": ["Globe", "TM", "Smart", "TNT", "DITO", "Other"] },
+        "category": { "type": "string", "enum": ["regular", "data", "call_text", "combo", "special"] },
+        "description": { "type": "string", "maxLength": 512 },
+        "faceValue": { "type": "number" },
+        "sellingPrice": { "type": "number" },
+        "providerCost": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "providerId": { "type": "string", "maxLength": 64 },
+        "providerProductId": { "type": "string", "maxLength": 64 },
+        "fulfillmentMode": { "type": "string", "enum": ["auto", "manual"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "network", "category", "faceValue", "sellingPrice", "isActive", "fulfillmentMode"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Prepaid load purchase order",
+      "type": "object",
+      "properties": {
+        "orderReference": { "type": "string", "maxLength": 64 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "customerEmail": { "type": "string", "maxLength": 256 },
+        "customerName": { "type": "string", "maxLength": 128 },
+        "productId": { "type": "string", "maxLength": 128 },
+        "productNameSnapshot": { "type": "string", "maxLength": 128 },
+        "networkSnapshot": { "type": "string", "maxLength": 32 },
+        "recipientNumber": { "type": "string", "maxLength": 32 },
+        "sellingPrice": { "type": "number" },
+        "providerCost": { "type": "number" },
+        "gatewayFee": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 8 },
+        "paymentGateway": { "type": "string", "maxLength": 64 },
+        "paymentReference": { "type": "string", "maxLength": 128 },
+        "paymentStatus": { 
+          "type": "string", 
+          "enum": ["pending", "processing", "paid", "failed", "cancelled", "expired", "refund_pending", "refunded", "review_required"] 
+        },
+        "fulfillmentStatus": { 
+          "type": "string", 
+          "enum": ["not_started", "queued", "processing", "successful", "failed", "unknown", "manual_review", "cancelled"] 
+        },
+        "providerReference": { "type": "string", "maxLength": 128 },
+        "failureCode": { "type": "string", "maxLength": 128 },
+        "failureReason": { "type": "string", "maxLength": 512 },
+        "idempotencyKey": { "type": "string", "maxLength": 128 },
+        "manualPaymentProof": { "type": "string", "maxLength": 1024 },
+        "manualPaymentRef": { "type": "string", "maxLength": 128 },
+        "notes": { "type": "string", "maxLength": 512 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "paidAt": { "type": "string", "format": "date-time" },
+        "fulfilledAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderReference", "userId", "productId", "recipientNumber", "sellingPrice", "currency", "paymentStatus", "fulfillmentStatus"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Payment transaction record",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string", "maxLength": 128 },
+        "orderReference": { "type": "string", "maxLength": 64 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "gateway": { "type": "string", "maxLength": 64 },
+        "gatewayReference": { "type": "string", "maxLength": 128 },
+        "amount": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 8 },
+        "status": { "type": "string", "enum": ["pending", "processing", "paid", "failed", "cancelled", "refunded"] },
+        "verifiedAt": { "type": "string", "format": "date-time" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["orderId", "userId", "gateway", "amount", "currency", "status"]
+    },
+    "FinancialLedger": {
+      "title": "FinancialLedger",
+      "description": "Immutable ledger entry for verified financial events and profit tracking",
+      "type": "object",
+      "properties": {
+        "orderId": { "type": "string", "maxLength": 128 },
+        "orderReference": { "type": "string", "maxLength": 64 },
+        "entryType": { "type": "string", "enum": ["GROSS_SALE", "PROVIDER_COST", "GATEWAY_FEE", "REFUND", "ADJUSTMENT"] },
+        "amountInCentavos": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 8 },
+        "sourceReference": { "type": "string", "maxLength": 128 },
+        "reversalOf": { "type": "string", "maxLength": 128 },
+        "description": { "type": "string", "maxLength": 256 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["entryType", "amountInCentavos", "currency", "description"]
+    },
+    "SupportRequest": {
+      "title": "SupportRequest",
+      "description": "Customer inquiry or order issue ticket",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "orderId": { "type": "string", "maxLength": 128 },
+        "orderReference": { "type": "string", "maxLength": 64 },
+        "customerEmail": { "type": "string", "maxLength": 256 },
+        "category": { "type": "string", "enum": ["load_delay", "wrong_number", "payment_issue", "cancellation", "other"] },
+        "subject": { "type": "string", "maxLength": 128 },
+        "description": { "type": "string", "maxLength": 1024 },
+        "status": { "type": "string", "enum": ["open", "in_progress", "resolved", "closed"] },
+        "adminNotes": { "type": "string", "maxLength": 1024 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "category", "subject", "description", "status"]
+    },
+    "AdminAuditLog": {
+      "title": "AdminAuditLog",
+      "description": "Privileged action audit log",
+      "type": "object",
+      "properties": {
+        "adminUid": { "type": "string", "maxLength": 128 },
+        "adminEmail": { "type": "string", "maxLength": 256 },
+        "action": { "type": "string", "maxLength": 128 },
+        "targetType": { "type": "string", "maxLength": 64 },
+        "targetId": { "type": "string", "maxLength": 128 },
+        "details": { "type": "string", "maxLength": 1024 },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["adminUid", "action", "targetType", "targetId"]
+    },
+    "SystemSettings": {
+      "title": "SystemSettings",
+      "description": "Store configuration and operational flags",
+      "type": "object",
+      "properties": {
+        "businessName": { "type": "string", "maxLength": 128 },
+        "supportPhone": { "type": "string", "maxLength": 32 },
+        "supportEmail": { "type": "string", "maxLength": 128 },
+        "operatingHours": { "type": "string", "maxLength": 128 },
+        "manualPaymentGcashName": { "type": "string", "maxLength": 128 },
+        "manualPaymentGcashNumber": { "type": "string", "maxLength": 32 },
+        "manualPaymentMayaName": { "type": "string", "maxLength": 128 },
+        "manualPaymentMayaNumber": { "type": "string", "maxLength": 32 },
+        "announcement": { "type": "string", "maxLength": 512 },
+        "sandboxMode": { "type": "boolean" },
+        "autoFulfillmentEnabled": { "type": "boolean" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["businessName", "sandboxMode"]
+    },
+    "PriceDropAlert": {
+      "title": "PriceDropAlert",
+      "description": "Customer subscription for prepaid load promo price decrease alerts",
+      "type": "object",
+      "properties": {
+        "productId": { "type": "string", "maxLength": 128 },
+        "productName": { "type": "string", "maxLength": 128 },
+        "network": { "type": "string", "maxLength": 32 },
+        "initialPrice": { "type": "number" },
+        "email": { "type": "string", "maxLength": 256 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "isActive": { "type": "boolean" },
+        "notified": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["productId", "email", "initialPrice", "isActive"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles with ownership isolation"
+    },
+    "/admins/{adminId}": {
+      "schema": "UserProfile",
+      "description": "List of authorized administrator UIDs"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Available prepaid load products and promos (public read, admin write)"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Prepaid load orders placed by customers"
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Payment records associated with orders"
+    },
+    "/financialLedger/{entryId}": {
+      "schema": "FinancialLedger",
+      "description": "Immutable accounting ledger entries for sales, costs, and profit"
+    },
+    "/supportRequests/{requestId}": {
+      "schema": "SupportRequest",
+      "description": "Customer support requests and issue tickets"
+    },
+    "/adminAuditLogs/{logId}": {
+      "schema": "AdminAuditLog",
+      "description": "Audit trail for sensitive admin operations"
+    },
+    "/settings/{settingId}": {
+      "schema": "SystemSettings",
+      "description": "Storewide settings and payment details (public read, admin write)"
+    },
+    "/priceDropAlerts/{alertId}": {
+      "schema": "PriceDropAlert",
+      "description": "Customer subscriptions for price drop email notifications"
+    }
+  }
+}
